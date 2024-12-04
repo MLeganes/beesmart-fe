@@ -1,0 +1,7 @@
+{
+  "name": "GarbageDisposal",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
