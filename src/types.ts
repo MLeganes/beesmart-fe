@@ -3,4 +3,5 @@ export interface Vehicle {
       name: string;
       lat: number;
       lng: number;
+      driver: string;
     }

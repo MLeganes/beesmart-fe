@@ -1,20 +1,29 @@
 import React from "react";
 import { Marker, Popup } from "react-leaflet";
 import L from "leaflet";
+import TruckIcon from "../assets/images/garbage-truck.svg"
+import "./VehileMarker.css"
 
 interface VehicleMarkerProps {
-  vehicle: { id: number; name: string; lat: number; lng: number };
+  vehicle: { id: number; name: string; lat: number; lng: number ; driver:string};
 }
 
 const carIcon = new L.Icon({
-  iconUrl: "https://cdn-icons-png.flaticon.com/512/7435/7435673.png",
-  iconSize: [25, 25],
+  iconUrl: TruckIcon,
+  iconSize: [35, 35],
+  className: "truck-icon",
 });
 
 const VehicleMarker: React.FC<VehicleMarkerProps> = ({ vehicle }) => {
   return (
     <Marker position={[vehicle.lat, vehicle.lng]} icon={carIcon}>
-      <Popup>{vehicle.name}</Popup>
+     <Popup>
+        <div style={{ textAlign: "center", color: "black" }}>
+          <strong>{vehicle.name}</strong>
+          <br />
+          Driver: {vehicle.driver}
+        </div>
+      </Popup>
     </Marker>
   );
 };

@@ -6,7 +6,7 @@ const Map: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
   return (
     <MapContainer
       center={position}
-      zoom={13}
+      zoom={13.8}
       scrollWheelZoom={true}
       style={{ height: "100vh", width: "100%" }}
     >

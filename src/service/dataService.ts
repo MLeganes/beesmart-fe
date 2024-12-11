@@ -3,13 +3,29 @@ import { Vehicle } from "../types";
 export const fetchVehicleData = (): Promise<Vehicle[]> => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      const vehicles: Vehicle[] = [
-        { id: 1, name: 'Truck 1', lat: 48.7758, lng: 9.1829 },
-        { id: 2, name: 'Truck 2', lat: 48.7858, lng: 9.1929 },
-        { id: 3, name: 'Truck 3', lat: 48.7658, lng: 9.1729 },
-        { id: 4, name: 'Truck 4', lat: 48.7558, lng: 9.1629 },
-        { id: 5, name: 'Truck 5', lat: 48.7458, lng: 9.1529 },
+      const baseLat = 48.7758;
+      const baseLng = 9.1829;
+      const drivers = ["Alice", "Bob", "Charlie", "Diana", "Ethan"];
+      const regions = [
+        { latOffset: 0.05, lngOffset: 0.05 },  // Top-right quadrant
+        { latOffset: 0.05, lngOffset: -0.05 }, // Top-left quadrant
+        { latOffset: -0.05, lngOffset: 0.05 }, // Bottom-right quadrant
+        { latOffset: -0.05, lngOffset: -0.05 }, // Bottom-left quadrant
+        { latOffset: 0, lngOffset: 0 },        // Center region
       ];
+
+      const vehicles: Vehicle[] = Array.from({ length: 5 }, (_, i) => {
+        const region = regions[i];
+
+        return {
+          id: i + 1,
+          name: `Truck ${i + 1}`,
+          lat: baseLat + region.latOffset + (Math.random() - 0.5) * 0.06, // Stay within assigned region
+          lng: baseLng + region.lngOffset + (Math.random() - 0.5) * 0.06,
+          driver:drivers[i], 
+        };
+      });
+
       resolve(vehicles);
     }, 2000);
   });
