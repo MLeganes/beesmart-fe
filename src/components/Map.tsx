@@ -1,19 +1,26 @@
 import React from "react";
-import { MapContainer, TileLayer } from "react-leaflet";
+import { MapContainer, TileLayer, useMap } from "react-leaflet";
 
-const position: [number, number] = [48.7758, 9.1829];
-const Map: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
+interface MapProps {
+  center: [number, number];
+  zoom: number;
+  children: React.ReactNode;
+}
+
+const ChangeView: React.FC<{ center: [number, number]; zoom: number }> = ({ center, zoom }) => {
+  const map = useMap();
+  map.setView(center, zoom);
+  return null;
+};
+
+const Map: React.FC<MapProps> = ({ center, zoom, children }) => {
   return (
-    <MapContainer
-      center={position}
-      zoom={13.8}
-      scrollWheelZoom={true}
-      style={{ height: "100vh", width: "100%" }}
-    >
+    <MapContainer center={center} zoom={zoom} style={{ height: "100vh", width: "100%" }}>
       <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
+      <ChangeView center={center} zoom={zoom} />
       {children}
     </MapContainer>
   );
