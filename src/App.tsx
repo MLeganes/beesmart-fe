@@ -9,7 +9,7 @@ const App: React.FC = () => {
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
   const [selectedVehicleId, setSelectedVehicleId] = useState<number | null>(null);
   const [mapCenter, setMapCenter] = useState<[number, number]>([48.7758, 9.1829]);
-  const [mapZoom, setMapZoom] = useState<number>(13);
+  const [mapZoom, setMapZoom] = useState<number>(12);
 
   useEffect(() => {
     const fetchData = () => {
@@ -17,7 +17,7 @@ const App: React.FC = () => {
     };
 
     fetchData();
-    const interval = setInterval(fetchData,2 * 6 * 1000);
+    const interval = setInterval(fetchData,2 * 6 * 10000);
 
     return () => clearInterval(interval);
   }, []);
